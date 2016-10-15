@@ -96,7 +96,19 @@ public GamePanel()
 				}
 				if(keyCode == KeyEvent.VK_DOWN){
 					DOWN = true;
-				}	
+				}
+				if(keyCode == KeyEvent.VK_A){
+					LEFT = true;
+				}
+				if(keyCode == KeyEvent.VK_D){
+					RIGHT = true;
+				}
+				if(keyCode == KeyEvent.VK_W){
+					UP = true;
+				}
+				if(keyCode == KeyEvent.VK_S){
+					DOWN = true;
+				}
 			}
 		@Override
 			public void keyReleased(KeyEvent e ) {
@@ -112,6 +124,19 @@ public GamePanel()
 					UP = false;
 				}
 				if(keyCode == KeyEvent.VK_DOWN){
+					DOWN = false;
+				}
+				
+				if(keyCode == KeyEvent.VK_A){
+					LEFT = false;
+				}
+				if(keyCode == KeyEvent.VK_D){
+					RIGHT = false;
+				}
+				if(keyCode == KeyEvent.VK_W){
+					UP = false;
+				}
+				if(keyCode == KeyEvent.VK_S){
 					DOWN = false;
 				}
 			}
