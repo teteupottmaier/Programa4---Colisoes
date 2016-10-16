@@ -76,7 +76,7 @@ private HashMap<String, AudioPlayer> sfx;
 public GamePanel()
 {
 	sfx = new HashMap<String, AudioPlayer>();
-	sfx.put("shot", new AudioPlayer("/res/som/mg.mp3"));
+	sfx.put("shot", new AudioPlayer("som/mg.mp3"));
 
 	setBackground(Color.white);
 	setPreferredSize( new Dimension(PWIDTH, PHEIGHT));

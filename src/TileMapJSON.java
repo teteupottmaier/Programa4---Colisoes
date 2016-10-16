@@ -21,8 +21,8 @@ public class TileMapJSON {
 	int MapX;
 	int MapY;
 	int NTileX, NTileY;
-	int Largura = 60;
-	int Altura = 50;
+	int Largura = 160;
+	int Altura = 150;
 	
 	int tileW = 16;
 	int tileH = 16;
