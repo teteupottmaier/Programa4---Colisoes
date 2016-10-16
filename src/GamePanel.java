@@ -1,13 +1,23 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.AffineTransform;
-
-import javax.swing.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
-import java.awt.image.*;
+
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class GamePanel extends JPanel implements Runnable
@@ -35,6 +45,8 @@ BufferedImage tileset;
 
 boolean LEFT, RIGHT,UP,DOWN,FIRE;
 
+
+
 int MouseX,MouseY;
 
 int diftime;
@@ -57,8 +69,14 @@ public static TileMapJSON mapa;
 
 int timertiro = 0;
 
+private HashMap<String, AudioPlayer> sfx;
+
+
+
 public GamePanel()
 {
+	sfx = new HashMap<String, AudioPlayer>();
+	sfx.put("shot", new AudioPlayer("/res/som/mg.mp3"));
 
 	setBackground(Color.white);
 	setPreferredSize( new Dimension(PWIDTH, PHEIGHT));
@@ -109,6 +127,7 @@ public GamePanel()
 				if(keyCode == KeyEvent.VK_S){
 					DOWN = true;
 				}
+				
 			}
 		@Override
 			public void keyReleased(KeyEvent e ) {
@@ -139,6 +158,7 @@ public GamePanel()
 				if(keyCode == KeyEvent.VK_S){
 					DOWN = false;
 				}
+				
 			}
 	});
 	
@@ -365,6 +385,7 @@ private void gameUpdate(long DiffTime)
 	timertiro+=DiffTime;
 	
 	if(FIRE&&timertiro>100){
+		sfx.get("shot").play();
 		int veltiro = 500;
 		float dx = (mapa.MapX+MouseX) - (heroi.x+heroi.cx);
 		float dy = (mapa.MapY+MouseY) - (heroi.y+heroi.cy);
@@ -387,6 +408,8 @@ private void gameUpdate(long DiffTime)
 		vy = (float)(veltiro*Math.sin(ang2));
 		proj = new Projetil((int)(heroi.x+heroi.cx), (int)(heroi.y+heroi.cy), vx, vy,heroi);
 		listaDeProjetil.add(proj);
+		
+		
 		
 		timertiro = 0;
 	}
